@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ru.elgupo.deathlineapp.R;
 import com.ru.elgupo.deathlineapp.model.Deadline;
+import com.ru.elgupo.deathlineapp.model.DeadlineDto;
 
 import java.util.List;
 
 public class DeadlineAdapter extends RecyclerView.Adapter<DeadlineAdapter.DeadlineViewHolder> {
 
-    private List<Deadline> deadlines;
+    private List<DeadlineDto> deadlines;
     private OnDeadlineDeleteListener deleteListener;
 
-    public DeadlineAdapter(List<Deadline> deadlines, OnDeadlineDeleteListener deleteListener) {
+    public DeadlineAdapter(List<DeadlineDto> deadlines, OnDeadlineDeleteListener deleteListener) {
         this.deadlines = deadlines;
         this.deleteListener = deleteListener;
     }
@@ -50,7 +51,7 @@ public class DeadlineAdapter extends RecyclerView.Adapter<DeadlineAdapter.Deadli
         });
     }
 
-    public void updateDeadlines(List<Deadline> newDeadlines) {
+    public void updateDeadlines(List<DeadlineDto> newDeadlines) {
         this.deadlines = newDeadlines;
         notifyDataSetChanged();
     }

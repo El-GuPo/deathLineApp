@@ -1,17 +1,10 @@
 package com.ru.elgupo.deathlineapp.repository;
 
-import com.ru.elgupo.deathlineapp.model.User;
-
 public class AuthRepositoryImpl implements AuthRepository{
     @Override
-    public boolean login(String email, String password) {
-        // TODO: поиск пользователя
-        return !email.isEmpty() && !password.isEmpty() && password.length() >= 3;
+    public Long login(String email, String password) {
+        // TODO: возвращает логин пользователя
+        return 1L;
     }
 
-    @Override
-    public Long getUserId(String email) {
-        // TODO: вернуть ID пользователя
-        return null;
-    }
 }

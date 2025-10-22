@@ -14,9 +14,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ru.elgupo.deathlineapp.MainActivity;
 import com.ru.elgupo.deathlineapp.R;
 import com.ru.elgupo.deathlineapp.adapter.DeadlineAdapter;
 import com.ru.elgupo.deathlineapp.model.Deadline;
+import com.ru.elgupo.deathlineapp.model.DeadlineDto;
 import com.ru.elgupo.deathlineapp.viewModels.CalendarViewModel;
 
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ public class CalendarFragment extends Fragment implements DeadlineAdapter.OnDead
 
         initRecyclerView(view);
         btnAddDeadline = view.findViewById(R.id.btn_add_deadline);
-        List<Deadline> deadlines = viewModel.getDeadlines();
+        List<DeadlineDto> deadlines = viewModel.getDeadlines((MainActivity) getActivity());
         adapter.updateDeadlines(deadlines);
 
         btnAddDeadline.setOnClickListener(v -> showAddDeadlineDialog());
@@ -85,9 +87,8 @@ public class CalendarFragment extends Fragment implements DeadlineAdapter.OnDead
 
             if (!title.isEmpty() && !date.isEmpty()) {
                 Deadline newDeadline = new Deadline(title, date, description);
-                viewModel.addDeadline(newDeadline);
-
-                adapter.updateDeadlines(viewModel.getDeadlines());
+                viewModel.addDeadline(newDeadline, (MainActivity) getActivity());
+                adapter.updateDeadlines(viewModel.getDeadlines((MainActivity) getActivity()));
             }
         });
         builder.setNegativeButton("Отмена", (dialog, which) -> dialog.cancel());
@@ -97,6 +98,6 @@ public class CalendarFragment extends Fragment implements DeadlineAdapter.OnDead
     @Override
     public void onDeadlineDelete(int position) {
         viewModel.removeDeadline(position);
-        adapter.updateDeadlines(viewModel.getDeadlines());
+        adapter.updateDeadlines(viewModel.getDeadlines((MainActivity) getActivity()));
     }
 }

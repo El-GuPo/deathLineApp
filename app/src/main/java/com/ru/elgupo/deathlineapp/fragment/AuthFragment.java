@@ -1,5 +1,8 @@
 package com.ru.elgupo.deathlineapp.fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +68,11 @@ public class AuthFragment extends Fragment {
     private void login() {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-        authViewModel.login(email, password);
+        Long id = authViewModel.login(email, password);
+        SharedPreferences prefs = activity.getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong("userId", id);
+        editor.apply();
     }
 
 }

@@ -5,7 +5,7 @@ import com.ru.elgupo.deathlineapp.services.dto.DeadlineDto;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-public class DeadlinesApiClinet {
+public class DeadlinesApiClient {
     private final DeadlinesApi api;
 
     public DeadlinesApiClient(String baseUrl) {
@@ -13,7 +13,7 @@ public class DeadlinesApiClinet {
                 .baseUrl(baseUrl)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
-        api = retrofit.create(DeadlinesApi.class);
+        this.api = retrofit.create(DeadlinesApi.class);
     }
 
     public DeadlinesApi getApi() {

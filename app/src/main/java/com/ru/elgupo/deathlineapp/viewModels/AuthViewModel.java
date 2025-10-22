@@ -21,12 +21,9 @@ public class AuthViewModel extends AndroidViewModel {
         authRepository = new AuthRepositoryImpl();
     }
 
-    public void login(String email, String password) {
-        if (authRepository.login(email, password)) {
-            isAuthenticated.setValue(true);
-        } else {
-            errorMessage.setValue("Неверные данные");
-        }
+    public Long login(String email, String password) {
+        isAuthenticated.setValue(true);
+        return authRepository.login(email, password);
     }
 
 }
