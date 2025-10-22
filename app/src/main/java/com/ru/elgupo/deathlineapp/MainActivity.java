@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.ru.elgupo.deathlineapp.fragment.AuthFragment;
+import com.ru.elgupo.deathlineapp.fragment.CalendarFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showCalendarFragment(){
-
+        CalendarFragment fragment = new CalendarFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
     }
 }
