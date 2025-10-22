@@ -3,6 +3,7 @@ package com.ru.elgupo.deathlineapp.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,9 +17,15 @@ import java.util.List;
 public class DeadlineAdapter extends RecyclerView.Adapter<DeadlineAdapter.DeadlineViewHolder> {
 
     private List<Deadline> deadlines;
+    private OnDeadlineDeleteListener deleteListener;
 
-    public DeadlineAdapter(List<Deadline> deadlines) {
+    public DeadlineAdapter(List<Deadline> deadlines, OnDeadlineDeleteListener deleteListener) {
         this.deadlines = deadlines;
+        this.deleteListener = deleteListener;
+    }
+
+    public interface OnDeadlineDeleteListener {
+        void onDeadlineDelete(int position);
     }
 
     @NonNull
@@ -35,6 +42,12 @@ public class DeadlineAdapter extends RecyclerView.Adapter<DeadlineAdapter.Deadli
         holder.titleTextView.setText(deadline.getTitle());
         holder.dateTextView.setText(deadline.getDate());
         holder.descriptionTextView.setText(deadline.getDescription());
+
+        holder.deleteButton.setOnClickListener(v -> {
+            if (deleteListener != null) {
+                deleteListener.onDeadlineDelete(position);
+            }
+        });
     }
 
     public void updateDeadlines(List<Deadline> newDeadlines) {
@@ -51,12 +64,14 @@ public class DeadlineAdapter extends RecyclerView.Adapter<DeadlineAdapter.Deadli
         TextView titleTextView;
         TextView dateTextView;
         TextView descriptionTextView;
+        Button deleteButton;
 
         public DeadlineViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.title_textview);
             dateTextView = itemView.findViewById(R.id.date_textview);
             descriptionTextView = itemView.findViewById(R.id.description_textview);
+            deleteButton = itemView.findViewById(R.id.delete_button);
         }
     }
 }
